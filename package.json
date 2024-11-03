@@ -1,0 +1,35 @@
+{
+  "name": "bookkeeping",
+  "version": "1.0.0",
+  "description": "final project of Node.js and Angular",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server",
+    "dev": "nodemon server",
+    "test": "jest",
+    "test:coverage": "npm run test -- --coverage"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MF-164/Bookkeeping.git"
+  },
+  "author": "Maly Fertig",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MF-164/Bookkeeping/issues"
+  },
+  "homepage": "https://github.com/MF-164/Bookkeeping#readme",
+  "dependencies": {
+    "axios": "^1.7.7",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.21.1",
+    "mongodb": "^6.10.0",
+    "uuid": "^11.0.2"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "nodemon": "^3.1.7",
+    "supertest": "^7.0.0"
+  }
+}
