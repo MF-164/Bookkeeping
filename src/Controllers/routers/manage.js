@@ -1,10 +1,11 @@
 const express = require('express');
-const {checkClientEmail, checkClientEmailDefault, createClientHandler} = require('../handlers/manage');
+const { handleCheckClientEmail, handleCheckClientEmailDefault, handleCreateClient, handleGetAllClients } = require('../handlers/manage');
 
 const router = express.Router();
 
-router.get('/checkClientEmail/:email', checkClientEmail);
-router.get('/checkClientEmail/', checkClientEmailDefault);
-router.post('/create', express.json(), createClientHandler);
+router.get('/checkClientEmail/:email', handleCheckClientEmail);
+router.get('/checkClientEmail/', handleCheckClientEmailDefault);
+router.post('/create', express.json(), handleCreateClient);
+router.get('/getAllClients', handleGetAllClients)
 
 module.exports = router;

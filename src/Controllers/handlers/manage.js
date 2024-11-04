@@ -1,6 +1,6 @@
-const { createClient, existClientEmail } = require('../../modules/users');
+const { createClient, existClientEmail, getAllclients } = require('../../modules/users');
 
-const checkClientEmail = async (req, res) => {
+const handleCheckClientEmail = async (req, res) => {
     try {
         const { email } = req.params;
         const exist = await existClientEmail(email);
@@ -10,12 +10,12 @@ const checkClientEmail = async (req, res) => {
     }
 };
 
-const checkClientEmailDefault = (req, res) => {
+const handleCheckClientEmailDefault = (req, res) => {
     const exist = false;
     res.status(200).json({ exist });
 };
 
-const createClientHandler = async (req, res) => {
+const handleCreateClient = async (req, res) => {
     try {
         const client = req.body;
         const newClient = await createClient(client);
@@ -25,8 +25,15 @@ const createClientHandler = async (req, res) => {
     }
 };
 
+const handleGetAllClients = async (req, res, next) => {
+    const response = await getAllclients()
+
+    res.status(200).json(response)
+}
+
 module.exports = {
-    checkClientEmail,
-    checkClientEmailDefault,
-    createClientHandler,
+    handleCheckClientEmail,
+    handleCheckClientEmailDefault,
+    handleCreateClient,
+    handleGetAllClients
 };

@@ -1,17 +1,13 @@
 const express = require('express')
-const { getAllclients } = require('../../modules/users')
+const { handleCreateReceipt } = require('../handlers/receipt')
 
 const router = express.Router()
 
-router.get('/', (req, res, next)=>{
+router.get('/', (req, res, next) => {
     res.status(200).json('welcome to receipt router')
     next()
 })
 
-router.get('/getAllClients', async (req, res, next) =>{
-    const response = await getAllclients()
-
-    res.status(200).json(response)
-})
+router.post('/create', express.json(), handleCreateReceipt)
 
 module.exports = router
