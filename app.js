@@ -5,8 +5,8 @@ const app = express()
 
 require('dotenv').config()
 
-const manage_router = require('./routers/manage')
-const receipt_router = require('./routers/receipt')
+const manage_router = require('./src/Controllers/routers/manage')
+const receipt_router = require('./src/Controllers/routers/receipt')
 
 app.get('/', (req, res) => {
     res.status(200).json({ message: 'welcome' })
