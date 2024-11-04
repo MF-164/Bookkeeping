@@ -1,5 +1,5 @@
 const express = require('express')
-const { getAllclients } = require('../../modules/users')
+const { getAllclients } = require('../../modules/clients')
 
 const router = express.Router()
 
