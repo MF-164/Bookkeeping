@@ -4,11 +4,11 @@ const { MongoOperation } = require('../services/mongo/mongo-operation')
 
 const mongoConnection = new MongoOperation('Bookkeeping')
 
-const existuserName = async (username) => {
+const existClientEmail = async (clientEmail) => {
     try {
-        mongoConnection.Collection = 'users'
-        
-        const response = await mongoConnection.find({ filter: { username } })
+        mongoConnection.Collection = 'clients'
+
+        const response = await mongoConnection.find({ filter: { email: clientEmail } })
 
         if (response.length > 0) {
             return true
@@ -22,29 +22,41 @@ const existuserName = async (username) => {
     }
 }
 
-const createUser = async (user) => {
-    //TODO: check user data    
-    if (await existuserName(user.username)) {
-        throw new Error(`userName ${user.username} exist in db`)
+const createClient = async (client) => {
+    //TODO: check client data    
+    if (await existClientEmail(client.email)) {
+        throw new Error(`clientEmail ${client.email} exist in db`)
     }
     const id = v4()
-    user.id = id
+    client.id = id
     try {
-        mongoConnection.Collection = 'users'
-        console.log('create collection `user`')
-        const response = await mongoConnection.insertItem(user)
+        mongoConnection.Collection = 'clients'
+        const response = await mongoConnection.insertItem(client)
         const { acknowledged } = response
         if (acknowledged)
-            return user
+            return client
         else
-            throw new Error(`user was not saved`)
+            throw new Error(`client was not saved`)
     }
     catch (error) {
         throw error
     }
 }
 
+const getAllclients = async () => {
+    try {
+        mongoConnection.Collection = 'clients'
+
+        const response = await mongoConnection.find()
+
+        return response
+    } catch (exception) {
+        throw exception
+    }
+}
+
 module.exports = {
-    createUser,
-    existuserName
+    createClient,
+    getAllclients,
+    existClientEmail
 }

@@ -1,19 +1,19 @@
 const express = require('express')
-const { createUser, existuserName } = require('../modules/users')
+const { createClient, existClientEmail } = require('../modules/users')
 
 const router = express.Router()
 
-router.get('/checkusername/:username', async (req, res) => {
+router.get('/checkClientEmail/:email', async (req, res) => {
     try {
-        const { username } = req.params
-        const exist = await existuserName(username)
+        const { email } = req.params
+        const exist = await existClientEmail(email)
         res.status(200).json({ exist })
     } catch (error) {
         res.status(500).send(error.message)
     }
 })
 
-router.get('/checkusername/', (req, res) => {
+router.get('/checkClientEmail/', (req, res) => {
     const exist = false
     res.status(200).json({ exist })
 })
@@ -21,9 +21,9 @@ router.get('/checkusername/', (req, res) => {
 
 router.post('/create', express.json(), async (req, res) => {
     try {
-        const user = req.body        
-        const newUser = await createUser(user)
-        res.status(201).send(newUser)
+        const client = req.body        
+        const newClient = await createClient(client)
+        res.status(201).send(newClient)
     }
     catch (error) {
         res.status(500).send(error.message)
