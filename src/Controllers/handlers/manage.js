@@ -10,7 +10,7 @@ const handleCheckClientEmail = async (req, res) => {
     }
 };
 
-const handleCheckClientEmailDefault = (req, res) => {
+const handleCheckClientEmailDefault = (__, res) => {
     const exist = false;
     res.status(200).json({ exist });
 };
@@ -25,10 +25,14 @@ const handleCreateClient = async (req, res) => {
     }
 };
 
-const handleGetAllClients = async (req, res, next) => {
-    const response = await getAllclients()
+const handleGetAllClients = async (__, res) => {
+    try {
+        const response = await getAllclients()
 
-    res.status(200).json(response)
+        res.status(200).json(response)
+    } catch (exception) {        
+        res.status(500).send(exception)
+    }
 }
 
 module.exports = {
