@@ -3,7 +3,7 @@ require('dotenv').config()
 const http = require('http')
 const app = require('./app')
 
-const { openConnection, closeConnection } = require('./services/mongo/mongo-connection')
+const { openConnection, closeConnection } = require('./src/services/mongo/mongo-connection')
 
 const { HOST, PORT, TEST_MONGO_SERVER } = process.env
 
