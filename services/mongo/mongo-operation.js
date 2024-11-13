@@ -8,7 +8,7 @@ class MongoOperation {
     }
 
     set Collection(value) {
-        this.myCollection = getClient().db(this.databaseName).collection(value)        
+        this.myCollection = getClient().db(this.databaseName).collection(value)                
     }
 
     get Collection() {
@@ -25,7 +25,7 @@ class MongoOperation {
         return resalt
     }
 
-    async find({ filter = {} } = {}) {
+    async find({ filter = {} } = {}) {        
         const resalt = await this.myCollection.find(filter).toArray()
         return resalt
     }
