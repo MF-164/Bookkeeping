@@ -9,7 +9,6 @@ async function openConnection(server) {
     if (typeof server !== 'string') {
         throw new Error('server url must be of type string')
     }
-    // trim - פונקציה שמורידה רווחים מיותרים במשפט בהתחלה ובסוף
     if (!server.trim().startsWith('mongodb://') && !server.trim().startsWith('mongodb+srv://')) {
         throw new Error('server url must start with "mongodb://" or "mongodb+srv://"')
     }
@@ -23,8 +22,18 @@ async function openConnection(server) {
 }
 
 async function closeConnection() {
-    await client.close()
+    try {
+        if (client === null) {
+            throw new Error('Cannot close connection. Client is not connected.');
+        }
+        
+        await client.close();
+        client = null; // Reset the client after closing the connection
+    } catch (error) {
+        throw error;
+    }
 }
+
 
 const getClient = () => client
 
